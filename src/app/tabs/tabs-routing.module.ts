@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () => import('../pages/usuario-form/usuario-form.module').then( m => m.UsuarioFormPageModule)
       },
       {
+        path:'produtoForm',
+        loadChildren:() => import ('../pages/produto-form/produto-form.module').then(m => m.ProdutoFormPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

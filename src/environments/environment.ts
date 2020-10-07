@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyB-M4yNbRZq9PEu-AjANxAm5cqqAe5LuwQ",
-    authDomain: "bazarnet-e1e82.firebaseapp.com",
-    databaseURL: "https://bazarnet-e1e82.firebaseio.com",
-    projectId: "bazarnet-e1e82",
-    storageBucket: "bazarnet-e1e82.appspot.com",
-    messagingSenderId: "156191647255",
-    appId: "1:156191647255:web:ffa96c9e11f27099301e52",
-    measurementId: "G-FKVE5J624N"
+    apiKey: "AIzaSyBS31z1ljGYfm2ixJTfZNL7EXd1LfzlNmA",
+    authDomain: "bazarpoliproject.firebaseapp.com",
+    databaseURL: "https://bazarpoliproject.firebaseio.com",
+    projectId: "bazarpoliproject",
+    storageBucket: "bazarpoliproject.appspot.com",
+    messagingSenderId: "379123973661",
+    appId: "1:379123973661:web:bd750d6d670fd5e16c50f4",
+    measurementId: "G-0P2NHEBBJ3"
   }
 };
 
