@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      produto {{produto.nome}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Nome</ion-label>
+      <ion-text>{{produto.nome}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-text><img src="" alt=""></ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Valor</ion-label>
+      <ion-text>{{produto.valor}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Quantidade</ion-label>
+      <ion-text>{{produto.quantidade}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Codigo do produto</ion-label>
+      <ion-text>{{produto.codigo}}</ion-text>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

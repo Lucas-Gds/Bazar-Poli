@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Lista de Produtos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+ <ion-list>
+
+    <ion-item lines="inset" *ngFor="let p of produtos" routerLink="/tabs/produtoPerfil/{{p.id}}">
+      <ion-text>{{p.nome}}</ion-text>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

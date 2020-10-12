@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Lista de Usuarios
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-list>
+
+     <ion-item lines="inset" *ngFor="let usuario of usuarios" routerLink="/tabs/usuarioPerfil/{{usuario.id}}">
+      <ion-text>{{usuario.nome}} - {{usuario.email}}</ion-text>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

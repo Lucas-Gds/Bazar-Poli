@@ -12,8 +12,8 @@ const routes: Routes = [
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
       {
-        path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        path: 'usuarioList',
+        loadChildren: () => import('../pages/usuario-list/usuario-list.module').then(m => m.UsuarioListPageModule)
       },
       {
         path: 'tab3',
@@ -27,6 +27,19 @@ const routes: Routes = [
         path:'produtoForm',
         loadChildren:() => import ('../pages/produto-form/produto-form.module').then(m => m.ProdutoFormPageModule)
       },
+      {
+        path: 'usuarioPerfil/:id',
+        loadChildren: () => import('../pages/usuario-perfil/usuario-perfil.module').then( m => m.UsuarioPerfilPageModule)
+      },
+      {
+        path: 'produtoPerfil/:id',
+        loadChildren: () => import('../pages/produto-perfil/produto-perfil.module').then( m => m.ProdutoPerfilPageModule)
+      },
+      {
+        path: 'produtoList',
+        loadChildren: () => import('../pages/produto-list/produto-list.module').then( m => m.ProdutoListPageModule)
+      },
+
       {
         path: '',
         redirectTo: '/tabs/tab1',

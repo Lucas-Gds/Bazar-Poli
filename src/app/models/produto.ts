@@ -2,6 +2,6 @@ export class Produto {
     nome: string;
     valor: string;
     quantidade:number;
-    id:number;
+    codigo : number;
     ativo:boolean = true;
 }

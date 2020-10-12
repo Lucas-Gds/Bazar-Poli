@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { map } from 'rxjs/operators';
 import { Usuario } from '../models/usuario';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Usuario } from '../models/usuario';
 })
 export class UsuarioService {
 
-  private colletionUser: string = "usuarios";
+  private colletionUser: any = "usuarios";
 
   constructor(
     private fireDB: AngularFirestore
@@ -24,6 +24,18 @@ export class UsuarioService {
         senha: usuario.senha
       }
     );
+  }
+  getAll() {
+    return this.fireDB.collection<Usuario>(this.colletionUser).snapshotChanges()
+      .pipe(
+        map(
+          dados => dados.map(d => ({ id: d.payload.doc.id, ...d.payload.doc.data() }))
+        )
+      )
+  }
+
+  get(id:string){
+    return this.fireDB.collection(this.colletionUser).doc<Usuario>(id).valueChanges();
   }
 
 }
