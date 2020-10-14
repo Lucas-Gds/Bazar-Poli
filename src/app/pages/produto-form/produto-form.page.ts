@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Produto } from 'src/app/models/produto';
+import { MessageService } from 'src/app/services/message.service';
 import { ProdutoService } from 'src/app/services/produto.service';
 
 
@@ -12,41 +13,70 @@ import { ProdutoService } from 'src/app/services/produto.service';
 })
 export class ProdutoFormPage implements OnInit {
 
+  public id: string = null;
   public produto: Produto = new Produto;
 
 
   constructor(
     private produtoService: ProdutoService,
-    public alertController: AlertController
+    private activatedRoute: ActivatedRoute,
+    private router:Router,
+    private msg:MessageService
   ) { }
 
   ngOnInit() {
-  }
-  AddProd(form){
-    console.log(form);
-    if (form.valid){
-      this.produtoService.add(this.produto).then(
-        res=>{
-          console.log("Cadastrado!", res);
-          this.presentAlert("Aviso", "Produto Cadastrado!");
-        },
-        err=>{
-          console.error("Erro:", err);
-          this.presentAlert("Erro:", "Erro ao cadastrar produto");
+    this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    if (this.id) {
+      this.produtoService.get(this.id).subscribe(
+        res => {
+          this.produto = res
         }
       )
     }
   }
 
-  async presentAlert(tipo:string, texto:string) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: tipo,
-      //subHeader: 'Subtitle',
-      message: texto,
-      buttons: ['OK']
-    });
+  AddProd(form) {
+    //console.log(this.usuario);
+    console.log(form);
+    if (form.valid) {
+      this.msg.presentLoading()
+      if (!this.id) {
+        this.produtoService.add(this.produto).then(
+          res => {
+            console.log("Cadastrado!", res);
+            form.reset();
+            this.produto = new Produto;
+            this.msg.presentAlert("Aviso", "Produto cadastrado!");
+            this.msg.dismissLoading();
+            this.router.navigate([""]);
+          },
+          err => {
+            console.error("Erro:", err);
+            this.msg.dismissLoading();
+            this.msg.presentAlert("Erro:", "Produto não cadastrado!");
+          }
+        ).finally(
+          ()=> this.msg.dismissLoading()
+        )
+      } else {
+        this.produtoService.att(this.produto, this.id).then(
+          res => {
+            console.log("Atualizado!", res);
+            form.reset();
+            this.produto = new Produto;
+            this.msg.presentAlert("Aviso", "Produto atualizado!");
+            this.msg.dismissLoading();
+            this.router.navigate(["/tabs/produtoPerfil/",this.id]);
+          },
+          err => {
+            console.error("Erro:", err);
+            this.msg.dismissLoading();
+            this.msg.presentAlert("Erro:", "Produto não atualizado!");
+          }
+        )
+      }
+    }
 
-    await alert.present();
   }
+
 }

@@ -15,7 +15,7 @@ export class UsuarioService {
   ) { }
 
   add(usuario: Usuario) {
-    return this.fireDB.collection<Usuario>(this.colletionUser).add(
+    return this.fireDB.collection(this.colletionUser).add(
       {
         nome: usuario.nome,
         email: usuario.email,
@@ -37,5 +37,12 @@ export class UsuarioService {
   get(id:string){
     return this.fireDB.collection(this.colletionUser).doc<Usuario>(id).valueChanges();
   }
-
+  update(usuario:Usuario, id:string){
+    usuario.lat = usuario.lng++;
+    usuario.lng = usuario.lat++
+    return this.fireDB.collection(this.colletionUser).doc(id).update(usuario);
+  }
+  remover(id:string){
+    return this.fireDB.collection(this.colletionUser).doc(id).delete();
+  }
 }

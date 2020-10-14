@@ -24,7 +24,15 @@ const routes: Routes = [
         loadChildren: () => import('../pages/usuario-form/usuario-form.module').then( m => m.UsuarioFormPageModule)
       },
       {
+        path: 'usuarioForm/:id',
+        loadChildren: () => import('../pages/usuario-form/usuario-form.module').then( m => m.UsuarioFormPageModule)
+      },
+      {
         path:'produtoForm',
+        loadChildren:() => import ('../pages/produto-form/produto-form.module').then(m => m.ProdutoFormPageModule)
+      },
+      {
+        path:'produtoForm/:id',
         loadChildren:() => import ('../pages/produto-form/produto-form.module').then(m => m.ProdutoFormPageModule)
       },
       {

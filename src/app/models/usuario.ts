@@ -4,4 +4,6 @@ export class Usuario {
     tel:string;
     senha:string;
     ativo:boolean = true;
+    lat:number;
+    lng:number;
 }

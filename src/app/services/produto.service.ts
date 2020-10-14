@@ -14,7 +14,7 @@ export class ProdutoService {
   ) { }
 
   add(produto: Produto) {
-    return this.fireDB.collection<Produto>(this.ColletionProd).add(
+    return this.fireDB.collection(this.ColletionProd).add(
       {
         nome: produto.nome,
         valor: produto.valor,
@@ -32,7 +32,14 @@ export class ProdutoService {
         )
       )
   }
+
   get(id:string){
     return this.fireDB.collection(this.ColletionProd).doc<Produto>(id).valueChanges();
+  }
+  att(produto:Produto, id:string){
+    return this.fireDB.collection(this.ColletionProd).doc(id).update(produto);
+  }
+  remove(id:string){
+    return this.fireDB.collection(this.ColletionProd).doc(id).delete();
   }
 }

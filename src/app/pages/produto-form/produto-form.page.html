@@ -25,9 +25,13 @@
       <ion-label position="floating">Valor</ion-label>
       <ion-input type="text" name="valor" [(ngModel)]=produto.valor required></ion-input>
     </ion-item>
-
-
-    <ion-button type="submit" color="primary" expand="block" [disabled]="form.invalid">Salvar</ion-button>
+<div *ngIf="!id">
+  <ion-button type="submit" color="primary" expand="block" [disabled]="form.invalid">Salvar</ion-button>
+</div>
+<div *ngIf="id">
+  <ion-button type="submit" color="primary" expand="block" [disabled]="form.invalid">Atualizar</ion-button>
+</div>
+    
     <ion-button color="danger" expand="block">Cancelar</ion-button>
   </form>
 

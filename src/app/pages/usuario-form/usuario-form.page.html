@@ -14,8 +14,8 @@
 
     <ion-item>
       <ion-label position="floating">E-mail</ion-label>
-      <ion-input type="email" name="email" [(ngModel)]=usuario.email required 
-      pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"></ion-input>
+      <ion-input type="email" name="email" [(ngModel)]=usuario.email required
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -23,20 +23,32 @@
       <ion-input type="tel" name="tel" [(ngModel)]=usuario.tel></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="floating"> Senha <ion-text color="danger" *ngIf="s.invalid && s.dirty"><b>Senha invalida</b> </ion-text> </ion-label>
-      <ion-input type="password" name="senha" [(ngModel)]=usuario.senha required #s="ngModel" minlength="6"></ion-input>
-    </ion-item>
-    <!-- <ion-text color="danger" *ngIf="s.invalid && s.dirty"> Senha invalida  </ion-text>    -->
+    <div *ngIf="!id">
+      <ion-item>
+        <ion-label position="floating"> Senha <ion-text color="danger" *ngIf="s.invalid && s.dirty"><b>Senha
+              invalida</b> </ion-text>
+        </ion-label>
+        <ion-input type="password" name="senha" [(ngModel)]=usuario.senha required #s="ngModel" minlength="6">
+        </ion-input>
+      </ion-item>
+      <!-- <ion-text color="danger" *ngIf="s.invalid && s.dirty"> Senha invalida  </ion-text>    -->
 
-    <ion-item>
-      <ion-label position="floating">Confirmar Senha <ion-text color="danger" *ngIf="c.value != s.value && c.dirty">
-          <b>Senhas diferentes!</b> </ion-text>
-      </ion-label>
-      <ion-input type="password" name="conf" [(ngModel)]="conf" required #c="ngModel"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating">Confirmar Senha <ion-text color="danger" *ngIf="c.value != s.value && c.dirty">
+            <b>Senhas diferentes!</b> </ion-text>
+        </ion-label>
+        <ion-input type="password" name="conf" [(ngModel)]="conf" required #c="ngModel"></ion-input>
+      </ion-item>
 
-    <ion-button type="submit" color="primary" expand="block" [disabled]="form.invalid || (c.value != s.value)">Salvar</ion-button>
+      <ion-button type="submit" color="primary" expand="block" [disabled]="form.invalid || (c.value != s.value)">Salvar
+      </ion-button>
+    </div>
+
+    <div *ngIf="id">
+      <ion-button type="submit" color="primary" expand="block" [disabled]="form.invalid">Atualizar</ion-button>
+    </div>
+
     <ion-button color="danger" expand="block">Cancelar</ion-button>
+
   </form>
 </ion-content>
