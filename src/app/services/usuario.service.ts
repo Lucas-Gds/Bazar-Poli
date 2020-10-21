@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../models/usuario';
@@ -11,19 +12,32 @@ export class UsuarioService {
   private colletionUser: any = "usuarios";
 
   constructor(
-    private fireDB: AngularFirestore
+    private fireDB: AngularFirestore,
+    public auth: AngularFireAuth
   ) { }
 
+
   add(usuario: Usuario) {
-    return this.fireDB.collection(this.colletionUser).add(
-      {
-        nome: usuario.nome,
-        email: usuario.email,
-        tel: usuario.tel,
-        ativo: usuario.ativo,
-        senha: usuario.senha
+    return this.auth.createUserWithEmailAndPassword(usuario.email, usuario.senha).then(
+      res => {
+        //return this.fireDB.collection(this.colletionUser).add(
+        return this.fireDB.collection(this.colletionUser).doc(res.user.uid).set(
+          {
+            nome: usuario.nome,
+            email: usuario.email,
+            tel: usuario.tel,
+            ativo: usuario.ativo,
+            //senha: usuario.senha
+          }
+        ).catch(
+          () => {
+            this.auth.user.subscribe(
+              res => res.delete()
+            )
+          }
+        );
       }
-    );
+    )
   }
   getAll() {
     return this.fireDB.collection<Usuario>(this.colletionUser).snapshotChanges()

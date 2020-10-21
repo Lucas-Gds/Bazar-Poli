@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Perfil do {{usuario.nome}}
+      Perfil do {{nome}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,6 +21,7 @@
       <ion-label>Telefone</ion-label>
       <ion-text>{{usuario.tel}}</ion-text>
     </ion-item>
+    <ion-button type="button" color="warning" expand="block" (click)="logout()">Logout</ion-button>
 
   </ion-list>
 </ion-content>

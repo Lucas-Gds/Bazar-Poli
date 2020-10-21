@@ -3,6 +3,10 @@
     <ion-title>
       Inicio <!-- Tab1 -->
     </ion-title>
+    <ion-title slot="end">
+      <ion-icon name="person" routerLink="/login" *ngIf="!user"></ion-icon>
+      <ion-text routerLink="/tabs/usuarioPerfil" *ngIf="user">{{user.nome}}</ion-text>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 

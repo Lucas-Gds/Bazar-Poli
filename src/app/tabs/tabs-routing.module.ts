@@ -40,6 +40,10 @@ const routes: Routes = [
         loadChildren: () => import('../pages/usuario-perfil/usuario-perfil.module').then( m => m.UsuarioPerfilPageModule)
       },
       {
+        path: 'usuarioPerfil',
+        loadChildren: () => import('../pages/usuario-perfil/usuario-perfil.module').then( m => m.UsuarioPerfilPageModule)
+      },
+      {
         path: 'produtoPerfil/:id',
         loadChildren: () => import('../pages/produto-perfil/produto-perfil.module').then( m => m.ProdutoPerfilPageModule)
       },
