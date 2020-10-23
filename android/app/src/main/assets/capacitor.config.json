@@ -1,0 +1,13 @@
+{
+  "appId": "br.com.LgTI.BazarNet",
+  "appName": "ionic_BazarNet-Poli",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

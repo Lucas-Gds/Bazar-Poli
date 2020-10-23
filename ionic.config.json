@@ -1,5 +1,7 @@
 {
   "name": "ionic_BazarNet-Poli",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

@@ -8,6 +8,11 @@
 
 <ion-content [fullscreen]="true">
 
+  <ion-item lines="none">
+    <img [src]="preview" (click)="alterarFoto()" *ngIf="preview">
+    <img src="assets/perfil.png" (click)="alterarFoto()" *ngIf="!preview">
+  </ion-item>
+
   <ion-list>
     <ion-item>
       <ion-label>Nome</ion-label>
