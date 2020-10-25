@@ -20,8 +20,15 @@
     </ion-item-options>
 
     <ion-item lines="inset" routerLink="/tabs/produtoPerfil/{{p.id}}">
-      <ion-text>{{p.nome}}</ion-text>
+      <ion-avatar slot="start" *ngIf="p.foto">
+        <img [src]="p.foto">
+      </ion-avatar>
+      <ion-avatar slot="start" *ngIf="!p.foto">
+        <img src="assets/papelao.png">
+      </ion-avatar>
+      <ion-text>{{p.nome}} - {{p.valor}}</ion-text>
     </ion-item>
+    
 
     <ion-item-options side="end">
       <ion-item-option color="success" routerLink="/tabs/produtoForm/{{p.id}}"> Alterar </ion-item-option>

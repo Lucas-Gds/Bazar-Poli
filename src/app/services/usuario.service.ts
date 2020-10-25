@@ -59,4 +59,11 @@ export class UsuarioService {
   remover(id:string){
     return this.fireDB.collection(this.colletionUser).doc(id).delete();
   }
+  updatePhoto(id:string, photo:string){
+    return this.fireDB.collection(this.colletionUser).doc(id).update(
+      {
+        foto: photo
+      }
+    )
+  }
 }

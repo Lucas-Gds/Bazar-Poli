@@ -8,6 +8,39 @@
 
 <ion-content [fullscreen]="true">
 
+  <ion-item lines="none">
+
+
+    <ion-slides pager="true" [options]="slideOpts">
+
+      <ion-slide *ngIf="produto.foto">
+      <img [src]="produto.foto">
+        
+      </ion-slide>
+      <ion-slide *ngIf="!produto.foto">
+        <img [src]="preview" (click)="alterarFoto()" *ngIf="preview">
+        <img src="assets/papelao.png" (click)="alterarFoto()" *ngIf="!preview">
+      </ion-slide>
+
+      <ion-slide *ngIf="produto.foto2">
+        <img [src]="produto.foto2">
+        </ion-slide>
+      <ion-slide *ngIf="!produto.foto2">
+        <img [src]="preview2" (click)="alterarFoto2()" *ngIf="preview2">
+        <img src="assets/papelao.png" (click)="alterarFoto2()" *ngIf="!preview2">
+      </ion-slide>
+
+      <ion-slide *ngIf="produto.foto3">
+        <img [src]="produto.foto3">
+      </ion-slide>
+      <ion-slide *ngIf="!produto.foto3">
+        <img [src]="preview3" (click)="alterarFoto3()" *ngIf="preview3">
+        <img src="assets/papelao.png" (click)="alterarFoto3()" *ngIf="!preview3">
+      </ion-slide>
+    </ion-slides>
+
+  </ion-item>
+
   <ion-list>
     <ion-item>
       <ion-label>Nome</ion-label>

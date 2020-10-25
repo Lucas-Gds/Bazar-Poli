@@ -8,7 +8,12 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-item lines="none">
+  <ion-item lines="none" *ngIf="usuario.foto">
+    <img [src]="preview" (click)="alterarFoto()" *ngIf="preview">
+    <img src="assets/perfil.png" (click)="alterarFoto()" *ngIf="!preview">
+  </ion-item>
+
+  <ion-item lines="none" *ngIf="!usuario.foto">
     <img [src]="preview" (click)="alterarFoto()" *ngIf="preview">
     <img src="assets/perfil.png" (click)="alterarFoto()" *ngIf="!preview">
   </ion-item>
