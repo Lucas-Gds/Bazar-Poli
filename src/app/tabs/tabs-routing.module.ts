@@ -16,8 +16,8 @@ const routes: Routes = [
         loadChildren: () => import('../pages/usuario-list/usuario-list.module').then(m => m.UsuarioListPageModule)
       },
       {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'lojaLocais',
+        loadChildren: () => import('../pages/loja-locais/loja-locais.module').then( m => m.LojaLocaisPageModule)
       },
       {
         path: 'usuarioForm',
