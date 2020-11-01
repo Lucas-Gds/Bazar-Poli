@@ -1,6 +1,6 @@
 export class Produto {
     nome: string;
-    valor: string;
+    valor: number;
     image: string;
     image2: string;
     image3: string;

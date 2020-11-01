@@ -12,7 +12,11 @@
 
 <ion-content [fullscreen]="true">
  
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+
+
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!user">
     <ion-fab-button color="danger" routerLink="/tabs/usuarioForm">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

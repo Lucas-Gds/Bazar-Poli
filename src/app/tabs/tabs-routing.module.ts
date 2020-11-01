@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../pages/loja-locais/loja-locais.module').then( m => m.LojaLocaisPageModule)
       },
       {
+        path: 'lojaForm',
+        loadChildren: () => import('../pages/loja-form/loja-form.module').then( m => m.LojaFormPageModule)
+      },
+      {
         path: 'usuarioForm',
         loadChildren: () => import('../pages/usuario-form/usuario-form.module').then( m => m.UsuarioFormPageModule)
       },
@@ -50,6 +54,10 @@ const routes: Routes = [
       {
         path: 'produtoList',
         loadChildren: () => import('../pages/produto-list/produto-list.module').then( m => m.ProdutoListPageModule)
+      },
+      {
+        path: 'mapa',
+        loadChildren: () => import('../pages/map-loja/map-loja.module').then( m => m.MapLojaPageModule)
       },
 
       {

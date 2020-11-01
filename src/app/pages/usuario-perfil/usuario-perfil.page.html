@@ -32,6 +32,15 @@
       <ion-text>{{usuario.tel}}</ion-text>
     </ion-item>
     <ion-button type="button" color="warning" expand="block" (click)="logout()">Logout</ion-button>
+  </ion-list>
 
+  <ion-list>
+    
+    <ion-item>
+      <ion-button type="button" color="warning" expand="block" routerLink="/tabs/produtoForm">Postar Produto</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button type="button" color="warning"  routerLink="/tabs/lojaForm">Criar Loja</ion-button>
+    </ion-item>
   </ion-list>
 </ion-content>
