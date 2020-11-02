@@ -56,7 +56,7 @@ const routes: Routes = [
         loadChildren: () => import('../pages/produto-list/produto-list.module').then( m => m.ProdutoListPageModule)
       },
       {
-        path: 'mapa',
+        path: 'mapa/:id',
         loadChildren: () => import('../pages/map-loja/map-loja.module').then( m => m.MapLojaPageModule)
       },
 

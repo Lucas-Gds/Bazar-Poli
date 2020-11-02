@@ -8,8 +8,36 @@
 
 <ion-content [fullscreen]="true">
 
-  <agm-map [latitude]='lat' [longitude]='lng' [mapTypeId]='mapType' [zoom]="zoom">
+  <agm-map [latitude]="loja.lat" [longitude]="loja.lng"  [zoom]="zoom">
     <agm-marker [latitude]="loja.lat" [longitude]="loja.lng" [markerDraggable]="false"></agm-marker>
   </agm-map>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Nome</ion-label>
+      <ion-text>{{loja.nome}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Telefone</ion-label>
+      <ion-text>{{loja.tel}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Cidade</ion-label>
+      <ion-text>{{loja.cidade}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Rua</ion-label>
+      <ion-text>{{loja.endereco}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Bairro</ion-label>
+      <ion-text>{{loja.bairro}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Número</ion-label>
+      <ion-text>{{loja.numero}}</ion-text>
+    </ion-item>
+
+  </ion-list>
 
 </ion-content>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Loja } from 'src/app/models/loja';
+import { LojaService } from 'src/app/services/loja.service';
 
 
 @Component({
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./loja-locais.page.scss'],
 })
 export class LojaLocaisPage implements OnInit {
+  
+  public lojas: Loja[] = [];
+
+  constructor(
+    private lojaService: LojaService,
+  ) {}
+
+  ngOnInit(){
+    this.loadLojas();
+  }
 
 
-  constructor() {}
-
-  ngOnInit(){}
+  loadLojas() {
+    this.lojaService.getAll().subscribe(
+      res => {
+        this.lojas = res
+        console.log(this.lojas)
+      }
+    )
+  }
 }

@@ -10,11 +10,11 @@ export class Loja {
     numero: string;
     tel: string;
     ativo: boolean = true;
-
+    
     lat: number;
     lng: number;
 
-
+    
 
     //variaveis para remoção de erro
     logradouro: string;

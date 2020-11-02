@@ -1,12 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title slot="start">
-      Locais das Lojas
+      Lista de Lojas
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
   
-<ion-item   routerLink="/tabs/mapa"> aqui</ion-item>
+<ion-grid>
+  <ion-row>
+    <ion-col size="6" *ngFor="let loja of lojas">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{loja.nome}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{loja.endereco}}
+        </ion-card-content>
+        <ion-button  routerLink="/tabs/mapa/{{loja.id}}" expand="block">
+          +Informações
+        </ion-button>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
 </ion-content>

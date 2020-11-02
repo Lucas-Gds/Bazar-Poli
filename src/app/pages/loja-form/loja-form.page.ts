@@ -13,8 +13,6 @@ import { Router } from '@angular/router';
 export class LojaFormPage implements OnInit {
 
   public loja: Loja = new Loja;
-  public lat: number = 0;
-  public lng: number = 0;
   public id: string;
   public cep: string = "";
 
@@ -29,13 +27,13 @@ export class LojaFormPage implements OnInit {
 
 
   ngOnInit() {
-    this.getLocal();
+  
   }
 
   onSubmit(form) {
-    this.loja.lat = this.lat;
-    this.loja.lng = this.lng;
+   
     console.log(this.loja)
+     this.getLocal()
     if (form.valid) {
       this.msg.presentLoading()
       
@@ -58,17 +56,25 @@ export class LojaFormPage implements OnInit {
         )
       } }
 
-  getLocal() {
-    this.geolocation.getCurrentPosition().then(
-      (resp) => {
-        this.lat = resp.coords.latitude
-        this.lng = resp.coords.longitude
+      getLocal(){
+        this.lojaService.getCordinates(this.loja.endereco, this.loja.numero, this.loja.bairro).subscribe(
+          resultado => {
+            this.loja.lat = parseFloat(resultado[0].lat)
+            this.loja.lng = parseFloat(resultado[0].lon)
+          }
+        )
       }
-    ).catch((error) => {
-      console.log('Error getting location', error);
-    }
-    );
-  }
+  // getLocal() {
+  //   this.geolocation.getCurrentPosition().then(
+  //     (resp) => {
+  //       this.lat = resp.coords.latitude
+  //       this.lng = resp.coords.longitude
+  //     }
+  //   ).catch((error) => {
+  //     console.log('Error getting location', error);
+  //   }
+  //   );
+  // }
 
   getCEP() {
     
