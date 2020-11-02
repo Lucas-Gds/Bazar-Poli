@@ -19,6 +19,8 @@ export class ProdutoService {
         nome: produto.nome,
         valor: produto.valor,
         quantidade: produto.quantidade,
+        foto: produto.foto ? produto.foto: null,
+        galeria: produto.galeria ? produto.galeria: null,
         ativo: produto.ativo,
         codigo : produto.codigo
       }
@@ -42,27 +44,12 @@ export class ProdutoService {
   remove(id:string){
     return this.fireDB.collection(this.ColletionProd).doc(id).delete();
   }
-  updatePhoto(id:string, photo:string){
-    return this.fireDB.collection(this.ColletionProd).doc(id).update(
-      {
-        foto: photo
-      }
-    )
+  updatePhoto(id:string,index:number,fotos:string[]){
+    return this.fireDB.collection(this.ColletionProd).doc(id).update({
+      galeria:fotos,
+      foto:index
+    })
+ 
   }
-  updatePhoto2(id:string, photo:string){
-    return this.fireDB.collection(this.ColletionProd).doc(id).update(
-      {
-        foto2: photo
-      }
-    )
-  }
-  
-  updatePhoto3(id:string, photo:string){
-    return this.fireDB.collection(this.ColletionProd).doc(id).update(
-      {
-        foto3: photo
-      }
-    )
-  }
-
+ 
 }

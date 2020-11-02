@@ -13,7 +13,24 @@
 <ion-content [fullscreen]="true">
  
 
-
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let p of produtos">
+        <ion-card>
+          <ion-card-header>
+            <img src="{{p.galeria[p.foto]}}" />
+            <ion-card-title>{{p.nome}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{p.valor}}
+          </ion-card-content>
+          <ion-button expand="block" routerLink="/tabs/produtoPerfil/{{p.id}}">
+            Ver Detalhes
+          </ion-button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!user">

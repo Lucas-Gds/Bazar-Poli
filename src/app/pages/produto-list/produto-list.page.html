@@ -20,10 +20,10 @@
     </ion-item-options>
 
     <ion-item lines="inset" routerLink="/tabs/produtoPerfil/{{p.id}}">
-      <ion-avatar slot="start" *ngIf="p.foto">
-        <img [src]="p.foto">
+      <ion-avatar slot="start" *ngIf="p.galeria[p.foto]">
+        <img [src]="p.galeria[p.foto]">
       </ion-avatar>
-      <ion-avatar slot="start" *ngIf="!p.foto">
+      <ion-avatar slot="start" *ngIf="!p.galeria[p.foto]">
         <img src="assets/papelao.png">
       </ion-avatar>
       <ion-text>{{p.nome}} - {{p.valor}}</ion-text>

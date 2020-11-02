@@ -10,19 +10,20 @@
 
   <ion-item lines="none">
 
-
-    <ion-slides pager="true" [options]="slideOpts">
-
-      <ion-slide *ngIf="produto.foto">
-      <img [src]="produto.foto" (click)="alterarFoto()">
-        
-      </ion-slide>
-      <ion-slide *ngIf="!produto.foto">
-        <img [src]="preview" (click)="alterarFoto()" *ngIf="preview">
-        <img src="assets/papelao.png" (click)="alterarFoto()" *ngIf="!preview">
-      </ion-slide>
-    </ion-slides>
-
+    <ion-col size="8">
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let image of produto.galeria; let i=index">
+          <img src="{{image}}" alt="" (click)="opcaoFoto(i)">
+          <!-- <img [src]="preview" *ngIf="preview">
+          <img src="assets/papelao.png" *ngIf="!preview"> -->
+        </ion-slide>
+      </ion-slides>
+    </ion-col>
+    <ion-col *ngIf="user">
+      <ion-item type="button" color="warning" (click)="alterarFoto()">
+        Adicionar<br>foto
+      </ion-item>
+    </ion-col>
   </ion-item>
 
   <ion-list>

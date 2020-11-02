@@ -6,6 +6,7 @@ import { ProdutoService } from 'src/app/services/produto.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { MessageService } from 'src/app/services/message.service';
 import { ActionSheetController } from '@ionic/angular';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 @Component({
@@ -14,34 +15,59 @@ import { ActionSheetController } from '@ionic/angular';
   styleUrls: ['./produto-perfil.page.scss'],
 })
 export class ProdutoPerfilPage implements OnInit {
-
+  slideOpts = {
+    slidesPerView: 1,
+    slidesPerColumn: 1,
+    slidesPerGroup: 1,
+    watchSlidesProgress: true,
+  }
+  public user: any;
   public id: string = null;
   public produto: Produto;
   public preview: string = null;
-  public preview2: string = null;
-  public preview3: string = null;
-
-
+  public random: string = "";
+  public index: number;
   constructor(
     private activatedRoute: ActivatedRoute,
     private produtoService: ProdutoService,
     private router: Router,
     private camera: Camera,
     public msg: MessageService,
-    public actionSheetController:ActionSheetController
+    public actionSheetController: ActionSheetController,
+    public usuarioService: UsuarioService,
   ) { }
 
   ngOnInit() {
     this.verificarProduto();
 
   }
-
+  ionViewWillEnter() {
+    this.verfUser()
+  }
+  async verfUser() {
+    await this.usuarioService.auth.user.subscribe(
+      res => {
+        if (res)
+          this.usuarioService.get(res.uid).subscribe(
+            res => {
+              this.user = res;
+              console.log(res);
+            }
+          )
+      },
+      err => {
+        this.user = null
+      }
+    )
+  }
   verificarProduto() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if (this.id) {
       this.produtoService.get(this.id).subscribe(
         res => {
           this.produto = res
+          this.preview = this.produto.galeria[this.produto.foto];
+          this.index = this.produto.foto;
         })
     }
   }
@@ -55,13 +81,14 @@ export class ProdutoPerfilPage implements OnInit {
 
     this.camera.getPicture(options).then(
       (imageData) => {
-        // imageData is either a base64 encoded string or a file URI
+        // fotoData is either a base64 encoded string or a file URI
         // If it's base64 (DATA_URL):
         this.preview = 'data:image/jpeg;base64,' + imageData;
-        this.produto.image = this.preview;
-        //console.log(this.usuario.foto);
+
+        this.produto.galeria.push(this.preview);
+        this.produto.foto = this.produto.galeria.length - 1;
         this.msg.presentLoading();
-        this.produtoService.updatePhoto(this.id, this.produto.image).then(
+        this.produtoService.updatePhoto(this.id, this.produto.foto, this.produto.galeria).then(
           () => {
             this.msg.dismissLoading()
           }
@@ -72,7 +99,7 @@ export class ProdutoPerfilPage implements OnInit {
       }
     );
   }
-  escolherFoto(){
+  escolherFoto() {
     const options: CameraOptions = {
       quality: 50,
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -83,13 +110,13 @@ export class ProdutoPerfilPage implements OnInit {
 
     this.camera.getPicture(options).then(
       (imageData) => {
-        // imageData is either a base64 encoded string or a file URI
+        // fotoData is either a base64 encoded string or a file URI
         // If it's base64 (DATA_URL):
         this.preview = 'data:image/jpeg;base64,' + imageData;
-        this.produto.image = this.preview;
-        //console.log(this.usuario.foto);
+        this.produto.galeria.push(this.preview);
+        this.produto.foto = this.produto.galeria.length - 1;
         this.msg.presentLoading();
-        this.produtoService.updatePhoto(this.id, this.produto.image).then(
+        this.produtoService.updatePhoto(this.id, this.produto.foto, this.produto.galeria).then(
           () => {
             this.msg.dismissLoading()
           }
@@ -102,17 +129,17 @@ export class ProdutoPerfilPage implements OnInit {
   }
   async alterarFoto() {
     const actionSheet = await this.actionSheetController.create({
-      header: 'Escolha a origem da imagem.',
+      header: 'Escolha a origem da fotom.',
       cssClass: 'my-custom-class',
       buttons: [{
         text: 'Camera',
         icon: 'camera',
         handler: () => {
-         this.tirarFoto()
+          this.tirarFoto()
         }
       }, {
         text: 'Galeria',
-        icon: 'image',
+        icon: 'foto',
         handler: () => {
           this.escolherFoto()
         }
@@ -127,5 +154,53 @@ export class ProdutoPerfilPage implements OnInit {
     });
     await actionSheet.present();
   }
+  async opcaoFoto(index) {
+    const actionSheet2 = await this.actionSheetController.create({
+      header: 'O que fazer com a foto?',
+      cssClass: 'my-custom-class',
+      buttons: [{
+        text: 'Definir como padrão',
+        icon: 'foto',
+        handler: () => {
+
+          this.msg.presentLoading();
+          this.produtoService.updatePhoto(this.id, index, this.produto.galeria).then(
+            res => {
+              console.log(res);
+              this.msg.dismissLoading()
+            }
+          )
+        }
+      }, {
+        text: 'Apagar da Galeria',
+        icon: 'trash',
+        handler: () => {
+          this.index = this.produto.foto;
+          this.preview = this.produto.galeria[this.produto.foto];
+          this.index = index <= this.index ? this.index - 1 : this.index;
+          this.produto.galeria.splice(index, 1)
+          
+          this.msg.presentLoading();
+          
+          this.produtoService.updatePhoto(this.id, this.index, this.produto.galeria).then(
+            res => {
+              console.log(res);
+
+              this.msg.dismissLoading()
+            }
+          )
+        }
+      }, {
+        text: 'Cancelar',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet2.present();
+}
+
 
 }

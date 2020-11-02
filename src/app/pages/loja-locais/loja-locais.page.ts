@@ -25,7 +25,6 @@ export class LojaLocaisPage implements OnInit {
     this.lojaService.getAll().subscribe(
       res => {
         this.lojas = res
-        console.log(this.lojas)
       }
     )
   }

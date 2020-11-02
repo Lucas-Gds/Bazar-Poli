@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Produto } from '../models/produto';
+import { ProdutoService } from '../services/produto.service';
 import { UsuarioService } from '../services/usuario.service';
 
 
@@ -10,13 +12,18 @@ import { UsuarioService } from '../services/usuario.service';
 export class Tab1Page implements OnInit {
 
   public user: any;
-
+  public produtos: Produto[] = [];
   constructor(
-    public usuarioService: UsuarioService
+    public usuarioService: UsuarioService,
+    public produtoService: ProdutoService
   ) { }
 
   ngOnInit(): void {
-
+    this.produtoService.gerarTodos().subscribe(
+      resultado => {
+        this.produtos = resultado;
+      }
+      )
   }
 
   ionViewWillEnter() {

@@ -19,6 +19,7 @@
     <ion-tab-button tab="lojaLocais">
       <ion-icon name="basket-outline"></ion-icon>
       <ion-label>Lojas</ion-label>
+      <ion-badge color="danger" *ngIf="quantProds > 0">{{quantLojas}}</ion-badge>
     </ion-tab-button>
   </ion-tab-bar>
 

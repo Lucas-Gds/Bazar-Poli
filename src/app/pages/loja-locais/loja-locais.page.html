@@ -25,4 +25,10 @@
   </ion-row>
 </ion-grid>
 
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!user">
+  <ion-fab-button color="danger" routerLink="/tabs/lojaForm">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
 </ion-content>
